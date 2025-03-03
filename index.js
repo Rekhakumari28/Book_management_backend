@@ -23,16 +23,24 @@ app.get("/books", async (req, res) => {
   }
 });
 
-app.post("/books", async (req, res) => {
-  const {title, author, publishedYear, genre, language, country, rating, summary} = req.body
-  try {
-    const bookData = new Books({title, author, publishedYear, genre, language, country, rating, summary});
-    await bookData.save();
-    res.status(201).json(bookData);
-  } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+async function createBook(newBook){
+  try{
+      const book = new Books(newBook)
+      const saveBook = await book.save()
+      return saveBook
+  }catch(error){
+      console.log(error)
+  }    
+}
+
+app.post("/books", async (req,res)=>{
+  try{
+      const savedBooks = await createBook(req.body)
+      res.status(201).json({message: "New book created successfully.", book: savedBooks})
+  }catch(error){
+     res.status(500).json({error: "Failed to create new book data."})
   }
-});
+})
 
 app.delete("/books/:id", async (req, res) => {
   const bookId = req.params.id;
