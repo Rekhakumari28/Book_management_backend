@@ -24,10 +24,9 @@ app.get("/books", async (req, res) => {
 });
 
 app.post("/books", async (req, res) => {
-  const { bookName, author, genre, publishedYear, language, country, rating, coverImageUrl } = req.body;
-
+  
   try {
-    const bookData = new Books({ bookName, author, genre, publishedYear, language, country, rating, coverImageUrl });
+    const bookData = new Books(req.body);
     await bookData.save();
     res.status(201).json(bookData);
   } catch (error) {
