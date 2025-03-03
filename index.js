@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
   res.send("Hello, Express!");
 });
 
-app.get("/books", async (req, res) => {
+app.get("/myBooks", async (req, res) => {
   try {
     const allbooks = await MyBooks.find();
     res.json(allbooks);
@@ -33,7 +33,7 @@ async function createBook(newBook){
   }    
 }
 
-app.post("/books", async (req,res)=>{
+app.post("/myBooks", async (req,res)=>{
   try{
       const savedBooks = await createBook(req.body)
       res.status(201).json({message: "New book created successfully.", book: savedBooks})
@@ -42,7 +42,7 @@ app.post("/books", async (req,res)=>{
   }
 })
 
-app.delete("/books/:id", async (req, res) => {
+app.delete("/myBooks/:id", async (req, res) => {
   const bookId = req.params.id;
 
   try {
