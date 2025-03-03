@@ -39,6 +39,6 @@ coverImageUrl:{
 }
 });
 
-const Books = mongoose.model("Books", bookSchema);
+const MyBooks = mongoose.model("MyBooks", bookSchema);
 
-module.exports = { Books };
+module.exports = { MyBooks };

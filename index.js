@@ -3,7 +3,7 @@ const cors = require("cors");
 const app = express();
 
 const { initializeDatabase } = require("./db/db.connection");
-const { Books } = require("./models/book.model");
+const { MyBooks } = require("./models/book.model");
 
 app.use(cors());
 app.use(express.json());
@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 
 app.get("/books", async (req, res) => {
   try {
-    const allbooks = await Books.find();
+    const allbooks = await MyBooks.find();
     res.json(allbooks);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
@@ -25,7 +25,7 @@ app.get("/books", async (req, res) => {
 
 async function createBook(newBook){
   try{
-      const book = new Books(newBook)
+      const book = new MyBooks(newBook)
       const saveBook = await book.save()
       return saveBook
   }catch(error){
@@ -46,7 +46,7 @@ app.delete("/books/:id", async (req, res) => {
   const bookId = req.params.id;
 
   try {
-    const deletedBook = await Books.findByIdAndDelete(bookId);
+    const deletedBook = await MyBooks.findByIdAndDelete(bookId);
 
     if (!deletedBook) {
       return res.status(404).json({ error: "Book not found" });
