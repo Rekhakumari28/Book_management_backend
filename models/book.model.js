@@ -34,9 +34,6 @@ rating: {
 summary: {
     type: String,        
 },
-coverImageUrl: {
-    type: String,
-},
 });
 
 const Books = mongoose.model("Books", bookSchema);
