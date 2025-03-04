@@ -15,7 +15,6 @@ publishedYear :{
 },
 genre: [{
     type: String,
-    enum: ["Fiction", "Autobiography", "Non-fiction", "Business", "Mystery", "Thriller", "Science Fiction","Fantasy","Romance", "Historical","Biography","Self-help","other"]
 }],
 language: {
     type: String,
