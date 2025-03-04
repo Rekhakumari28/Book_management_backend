@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
   res.send("Hello, Express!");
 });
 
-app.get("/myBooks", async (req, res) => {
+app.get("/books", async (req, res) => {
   try {
     const allbooks = await MyBooks.find();
     res.json(allbooks);
@@ -23,19 +23,20 @@ app.get("/myBooks", async (req, res) => {
   }
 });
 
-app.post("/myBooks", async (req, res) => {
+app.post("/books", async (req, res) => {
   const { bookName, author, genre } = req.body;
 
   try {
     const bookData = new MyBooks({ bookName, author, genre });
     await bookData.save();
+    console.log(bookData)
     res.status(201).json(bookData);
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error", error });
   }
 });
 
-app.delete("/myBooks/:id", async (req, res) => {
+app.delete("/books/:id", async (req, res) => {
   const bookId = req.params.id;
 
   try {
