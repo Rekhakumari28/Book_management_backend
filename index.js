@@ -29,7 +29,7 @@ app.post("/books", async (req, res) => {
   try {
     const bookData = new MyBooks({ bookName, author, genre, language, rating, publishedYear });
     await bookData.save();
-    console.log(bookData)
+  
     res.status(201).json(bookData);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error", error });
